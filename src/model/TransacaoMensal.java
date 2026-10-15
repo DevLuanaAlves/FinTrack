@@ -1,17 +1,13 @@
-
 package model;
 
-/**
- *
- * @author ADMIN
- */
+import java.time.LocalDate;
+
 public class TransacaoMensal extends Transacao {
     private int mes;
-    
+
     public TransacaoMensal(String descricao, double valor, String tipo, int mes) {
-        super(descricao, valor, tipo);
-                this.mes = mes; 
-       
+        super(descricao, valor, tipo, LocalDate.now());
+        this.mes = mes;
     }
 
     public int getMes() {
@@ -21,7 +17,7 @@ public class TransacaoMensal extends Transacao {
     public void setMes(int mes) {
         this.mes = mes;
     }
-    
+
     @Override
     public String toString() {
         return super.toString() + "| Mes " + mes;

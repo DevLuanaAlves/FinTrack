@@ -1,6 +1,8 @@
 
 package app;
-
+import java.time.LocalDate;
+import java.sql.SQLException;
+import database.DatabaseInitializer;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import controller.FinTracker;
@@ -11,6 +13,8 @@ import utils.Formatador;
 
 public class Main {
     public static void main (String[] args) {
+        
+        DatabaseInitializer.inicializar();
         
         Scanner scanner = new Scanner(System.in);
         
@@ -61,7 +65,7 @@ public class Main {
                             scanner.nextLine(); // limpar o buffer
                             transacao = new TransacaoMensal(descricao, valor, tipo, mes);
                         } else {
-                            transacao = new Transacao(descricao, valor, tipo);
+                            transacao = new Transacao(descricao, valor, tipo, LocalDate.now());
                         }
 
                         finTracker.adicionarTransacao(transacao);
@@ -70,7 +74,7 @@ public class Main {
                         break;
 
                     case 2:
-                        finTracker.listarTrasacoes();
+                        finTracker.listarTransacoes();
                         break;
 
                     case 3:
@@ -78,11 +82,11 @@ public class Main {
                         break;
                         
                     case 4:
-                        System.out.println("Digite o indice da transacao: ");
-                        int indice = scanner.nextInt();
-                        
-                        finTracker.removerTransacao(indice);
-                        
+                        System.out.println("Digite o ID da transacao: ");
+                        int id = scanner.nextInt();
+
+                        finTracker.removerTransacao(id);
+
                         System.out.println("Transacao removida!");
                         break;
                         
@@ -109,7 +113,10 @@ public class Main {
             System.out.println("Entrada invalida! Digite um numero.");
             scanner.nextLine(); // limpar buffer teclado, senão entra em loop infinito
             
-        }
+        } catch (SQLException erro) {
+            System.out.println("Erro ao acessar o banco de dados");
+            erro.printStackTrace();
+}
             
     }
        

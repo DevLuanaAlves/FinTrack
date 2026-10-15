@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.DashboardController"
+            stylesheets="@style.css"
+            styleClass="root">
+
+    <!-- ================= MENU LATERAL ================= -->
+
+    <left>
+
+        <VBox prefWidth="240"
+              spacing="12"
+              styleClass="sidebar">
+
+            <padding>
+                <Insets top="25"
+                        right="15"
+                        bottom="25"
+                        left="15"/>
+            </padding>
+
+            <!-- LOGO -->
+
+            <HBox spacing="10"
+                  alignment="CENTER_LEFT">
+
+                <Label text="◆"
+                       styleClass="logo-icon"/>
+
+                <Label text="FinTrack"
+                       styleClass="logo"/>
+
+            </HBox>
+
+            <Label text="Seu dinheiro, no controle"
+                   styleClass="subtitle"/>
+
+            <Region prefHeight="20"/>
+
+
+            <!-- MENU -->
+
+            <Button text="⌂   Início"
+                    styleClass="menu-button-selected"/>
+
+            <Button text="☷   Transações"
+                    fx:id="btnTransacoes"
+                    onAction="#onAbrirTransacoes"
+                    styleClass="menu-button"/>
+
+            <Button text="◔   Categorias"
+                    styleClass="menu-button"/>
+
+            <Button text="◎   Metas"
+                    styleClass="menu-button"/>
+
+            <Button text="▥   Relatórios"
+                    styleClass="menu-button"/>
+
+            <Button text="⚙   Configurações"
+                    styleClass="menu-button"/>
+
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+
+            <!-- FRASE -->
+
+            <VBox spacing="8"
+                  styleClass="quote-box">
+
+                <Label text="Grandes sonhos"
+                       styleClass="quote-title"/>
+
+                <Label text="começam com boas escolhas."
+                       wrapText="true"
+                       styleClass="quote-text"/>
+
+            </VBox>
+
+        </VBox>
+
+    </left>
+
+
+    <!-- ================= CONTEÚDO PRINCIPAL ================= -->
+
+    <center>
+
+        <VBox spacing="20"
+              styleClass="content">
+
+            <padding>
+                <Insets top="25"
+                        right="30"
+                        bottom="30"
+                        left="30"/>
+            </padding>
+
+
+            <!-- CABEÇALHO -->
+
+            <HBox alignment="CENTER_LEFT">
+
+                <VBox spacing="5">
+
+                    <Label fx:id="lblTitulo"
+                           text="Olá!"
+                           styleClass="page-title"/>
+
+                    <Label fx:id="lblVisaoGeral"
+                           text="Aqui está um resumo das suas finanças."
+                           styleClass="page-subtitle"/>
+
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Label text="●"
+                       styleClass="profile"/>
+
+            </HBox>
+
+
+            <!-- ================= CARDS ================= -->
+
+            <GridPane hgap="15"
+                      vgap="15">
+
+                <columnConstraints>
+
+                    <ColumnConstraints percentWidth="33.33"/>
+
+                    <ColumnConstraints percentWidth="33.33"/>
+
+                    <ColumnConstraints percentWidth="33.33"/>
+
+                </columnConstraints>
+
+
+                <!-- SALDO -->
+
+                <VBox GridPane.columnIndex="0"
+                      spacing="8"
+                      styleClass="summary-card">
+
+                    <Label text="Saldo atual"
+                           styleClass="card-label"/>
+
+                    <Label fx:id="lblTituloSaldo"
+                           text="Disponível"
+                           styleClass="card-small"/>
+
+                    <Label fx:id="lblSaldo"
+                           text="R$ 0,00"
+                           styleClass="card-value"/>
+
+                </VBox>
+
+
+                <!-- RECEITAS -->
+
+                <VBox GridPane.columnIndex="1"
+                      spacing="8"
+                      styleClass="summary-card">
+
+                    <Label text="Receitas"
+                           styleClass="card-label"/>
+
+                    <Label fx:id="lblTituloReceitas"
+                           text="Entradas"
+                           styleClass="card-small"/>
+
+                    <Label fx:id="lblReceitas"
+                           text="R$ 0,00"
+                           styleClass="income-value-large"/>
+
+                </VBox>
+
+
+                <!-- DESPESAS -->
+
+                <VBox GridPane.columnIndex="2"
+                      spacing="8"
+                      styleClass="summary-card">
+
+                    <Label text="Despesas"
+                           styleClass="card-label"/>
+
+                    <Label fx:id="lblTituloDespesas"
+                           text="Saídas"
+                           styleClass="card-small"/>
+
+                    <Label fx:id="lblDespesas"
+                           text="R$ 0,00"
+                           styleClass="expense-value-large"/>
+
+                </VBox>
+
+            </GridPane>
+
+
+            <!-- ================= AÇÕES ================= -->
+
+            <HBox spacing="15">
+
+                <Button fx:id="btnReceita"
+                        text="+  Adicionar Receita"
+                        onAction="#onAdicionarReceita"
+                        styleClass="income-button"/>
+
+                <Button fx:id="btnDespesa"
+                        text="-  Adicionar Despesa"
+                        onAction="#onAdicionarDespesa"
+                        styleClass="expense-button"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Button text="Ver transações →"
+                        onAction="#onAbrirTransacoes"
+                        styleClass="transactions-button"/>
+
+            </HBox>
+
+
+            <!-- ================= GRÁFICO ================= -->
+
+                       <!-- ================= GRÁFICO ================= -->
+
+            <HBox spacing="12">
+
+                <!-- RESUMO DO MÊS -->
+                <VBox styleClass="chart-card" HBox.hgrow="ALWAYS">
+
+                    <Label text="Resumo do mês"
+                           styleClass="section-title"/>
+
+                    <BarChart fx:id="graficoMovimentacoes"
+                              animated="false"
+                              legendVisible="true"
+                              prefHeight="250"
+                              VBox.vgrow="ALWAYS">
+
+                        <xAxis>
+                            <CategoryAxis />
+                        </xAxis>
+
+                        <yAxis>
+                            <NumberAxis />
+                        </yAxis>
+
+                    </BarChart>
+
+                </VBox>
+
+
+                <!-- PORCENTAGEM POR TIPO -->
+                <VBox styleClass="chart-card" HBox.hgrow="ALWAYS">
+
+                    <Label text="Distribuição por tipo"
+                           styleClass="section-title"/>
+
+                    <PieChart fx:id="graficoTipos"
+                              animated="false"
+                              legendVisible="true"
+                              labelsVisible="true"
+                              prefHeight="250"
+                              VBox.vgrow="ALWAYS"/>
+
+                </VBox>
+
+            </HBox>
+
+        </VBox>
+
+    </center>
+
+
+    <!-- ================= PAINEL SCENE BUILDER ================= -->
+
+    <right>
+
+        <VBox prefWidth="300"
+              spacing="15"
+              styleClass="builder">
+
+            <padding>
+                <Insets top="25"
+                        right="18"
+                        bottom="20"
+                        left="18"/>
+            </padding>
+
+
+            
+
+            <Label text="Estrutura da Cena"
+                   styleClass="builder-section"/>
+
+
+            <VBox spacing="8"
+                  styleClass="scene-tree">
+
+                <Label text="⌄  Dashboard"
+                       styleClass="tree-root"/>
+
+                <Label text="    └─ Cabeçalho"
+                       styleClass="tree-item"/>
+
+                <Label text="    └─ Cards"
+                       styleClass="tree-item"/>
+
+                <Label text="    └─ Ações"
+                       styleClass="tree-item"/>
+
+                <Label text="    └─ Gráfico"
+                       styleClass="tree-item"/>
+
+            </VBox>
+
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+
+            <Button text="▶  Visualizar"
+                    styleClass="preview-button"/>
+
+            <Button text="Salvar"
+                    styleClass="save-button"/>
+
+        </VBox>
+
+    </right>
+
+</BorderPane>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/26"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.AdicionarTransacaoController"
+      stylesheets="@style.css"
+      alignment="CENTER"
+      spacing="18"
+      prefWidth="500"
+      prefHeight="400"
+      styleClass="transaction-form">
+
+    <padding>
+        <Insets top="35" right="50" bottom="35" left="50"/>
+    </padding>
+
+    <Label fx:id="lblTitulo"
+           text="Adicionar transação"
+           styleClass="form-title"/>
+
+    <Label text="Preencha os dados abaixo para registrar sua movimentação."
+           styleClass="form-subtitle"
+           wrapText="true"/>
+
+    <VBox spacing="7" prefWidth="350">
+
+        <Label text="Descrição"
+               styleClass="form-label"/>
+
+        <TextField fx:id="txtDescricao"
+                   promptText="Ex.: Salário, Mercado, Internet..."
+                   prefHeight="42"
+                   styleClass="form-input"/>
+
+    </VBox>
+
+    <VBox spacing="7" prefWidth="350">
+
+        <Label text="Valor"
+               styleClass="form-label"/>
+
+        <TextField fx:id="txtValor"
+                   promptText="Ex.: 150,00"
+                   prefHeight="42"
+                   styleClass="form-input"/>
+
+    </VBox>
+
+    <VBox spacing="10"
+          alignment="CENTER"
+          prefWidth="350">
+
+        <Button fx:id="btnSalvar"
+                text="Salvar transação"
+                onAction="#onSalvar"
+                prefWidth="350"
+                prefHeight="45"
+                styleClass="form-save-button"/>
+
+        <Button fx:id="btnCancelar"
+                text="Cancelar"
+                onAction="#onCancelar"
+                prefWidth="350"
+                prefHeight="40"
+                styleClass="form-cancel-button"/>
+
+    </VBox>
+
+</VBox>

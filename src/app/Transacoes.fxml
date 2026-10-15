@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/26"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.TransacoesController"
+            styleClass="root"
+            stylesheets="@../controller/style.css">
+
+    <!-- =========================
+         MENU LATERAL
+         ========================= -->
+    <left>
+        <VBox prefWidth="240"
+              spacing="12"
+              styleClass="sidebar">
+
+            <padding>
+                <Insets top="25" right="15" bottom="25" left="15"/>
+            </padding>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="◆" styleClass="logo-icon"/>
+                <Label text="FinTrack" styleClass="logo"/>
+            </HBox>
+
+            <Label text="Seu dinheiro, no controle"
+                   styleClass="subtitle"/>
+
+            <Region prefHeight="20"/>
+
+            <Button text="⌂   Início"
+                    styleClass="menu-button"/>
+
+            <Button text="☷   Transações"
+                    styleClass="menu-button-selected"/>
+
+            <Button text="◔   Categorias"
+                    styleClass="menu-button"/>
+
+            <Button text="◎   Metas"
+                    styleClass="menu-button"/>
+
+            <Button text="▥   Relatórios"
+                    styleClass="menu-button"/>
+
+            <Button text="⚙   Configurações"
+                    styleClass="menu-button"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <VBox spacing="8"
+                  styleClass="quote-box">
+
+                <Label text="Grandes sonhos"
+                       styleClass="quote-title"/>
+
+                <Label text="começam com boas escolhas."
+                       wrapText="true"
+                       styleClass="quote-text"/>
+            </VBox>
+
+        </VBox>
+    </left>
+
+
+    <!-- =========================
+         CONTEÚDO PRINCIPAL
+         ========================= -->
+    <center>
+
+        <VBox spacing="20"
+              styleClass="content">
+
+            <padding>
+                <Insets top="25"
+                        right="30"
+                        bottom="30"
+                        left="30"/>
+            </padding>
+
+
+            <!-- CABEÇALHO -->
+            <HBox alignment="CENTER_LEFT">
+
+                <VBox spacing="5">
+
+                    <Label fx:id="lblTituloTransacoes"
+                           text="Transações"
+                           styleClass="page-title"/>
+
+                    <Label fx:id="lblListaTransacoes"
+                           text="Acompanhe todas as suas movimentações."
+                           styleClass="page-subtitle"/>
+
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <Button fx:id="btnVoltar"
+                        text="←  Voltar"
+                        onAction="#onVoltar"
+                        styleClass="transactions-button"/>
+
+            </HBox>
+
+
+            <!-- CARDS RESUMO -->
+            <GridPane hgap="15"
+                      vgap="15">
+
+                <columnConstraints>
+
+                    <ColumnConstraints percentWidth="33.33"/>
+
+                    <ColumnConstraints percentWidth="33.33"/>
+
+                    <ColumnConstraints percentWidth="33.33"/>
+
+                </columnConstraints>
+
+
+                <VBox GridPane.columnIndex="0"
+                      spacing="8"
+                      styleClass="summary-card">
+
+                    <Label text="Movimentações"
+                           styleClass="card-label"/>
+
+                    <Label text="Total registrado"
+                           styleClass="card-small"/>
+
+                    <Label text="Transações"
+                           styleClass="card-value"/>
+
+                </VBox>
+
+
+                <VBox GridPane.columnIndex="1"
+                      spacing="8"
+                      styleClass="summary-card">
+
+                    <Label text="Entradas"
+                           styleClass="card-label"/>
+
+                    <Label text="Receitas"
+                           styleClass="card-small"/>
+
+                    <Label text="+"
+                           styleClass="income-value-large"/>
+
+                </VBox>
+
+
+                <VBox GridPane.columnIndex="2"
+                      spacing="8"
+                      styleClass="summary-card">
+
+                    <Label text="Saídas"
+                           styleClass="card-label"/>
+
+                    <Label text="Despesas"
+                           styleClass="card-small"/>
+
+                    <Label text="-"
+                           styleClass="expense-value-large"/>
+
+                </VBox>
+
+            </GridPane>
+
+
+            <!-- TABELA -->
+            <VBox spacing="15"
+                  VBox.vgrow="ALWAYS"
+                  styleClass="chart-card">
+
+                <HBox alignment="CENTER_LEFT">
+
+                    <VBox spacing="4">
+
+                        <Label text="Lista de transações"
+                               styleClass="section-title"/>
+
+                        <Label text="Todas as movimentações cadastradas"
+                               styleClass="card-small"/>
+
+                    </VBox>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                </HBox>
+
+
+                <TableView fx:id="tabelaTransacoes"
+                           VBox.vgrow="ALWAYS"
+                           styleClass="transactions-table">
+
+                    <columns>
+
+                        <TableColumn fx:id="colData"
+                                     text="Data"
+                                     prefWidth="130"/>
+
+                        <TableColumn fx:id="colDescricao"
+                                     text="Descrição"
+                                     prefWidth="300"/>
+
+                        <TableColumn fx:id="colTipo"
+                                     text="Tipo"
+                                     prefWidth="180"/>
+
+                        <TableColumn fx:id="colValor"
+                                     text="Valor"
+                                     prefWidth="180"/>
+
+                    </columns>
+
+                </TableView>
+
+
+                <!-- AÇÕES -->
+                <HBox alignment="CENTER_RIGHT"
+                      spacing="15">
+
+                    <Button fx:id="btnRemover"
+                            text="−  Remover selecionada"
+                            onAction="#onRemover"
+                            styleClass="expense-button"/>
+
+                </HBox>
+
+            </VBox>
+
+        </VBox>
+
+    </center>
+
+</BorderPane>
